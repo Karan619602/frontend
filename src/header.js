@@ -22,7 +22,7 @@ const Header = () => {
                 
 <div className="navbar">
       {user  ? (<div>
-        <h1 className="heading">Welcome to task app</h1>
+        <h1 className="heading">Welcome to app</h1>
 
        {user&& user.role==="admin" &&(
          <Link to="/dashboard" >Dashboard</Link>
@@ -35,8 +35,7 @@ const Header = () => {
 
      </div>  ) :   (
                         <Fragment>
-       <h1 className="heading">Welcome to task app</h1>
-<h3 className="heading"className="heading">Login first to add task</h3>
+       <h1 className="heading">Welcome to  app</h1>
                           <Link to="/login"  id="login_btn">Login</Link>
                           <Link to="/register"  id="signup_btn">signup</Link>
    <Link to="/profile">profile</Link>
