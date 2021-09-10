@@ -2,7 +2,6 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -45,5 +44,10 @@
       "last 1 safari version"
     ]
   },
-  "proxy":"https://loadrunnerapis.herokuapp.com"
+  "proxy": "https://loadrunnerapis.herokuapp.com",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
 }
