@@ -2,7 +2,6 @@
   "homepage": "http://Karan619602.github.io/frontend",
   "name": "frontend",
   "version": "0.1.0",
-  "proxy": "https://loadrunnerapis.herokuapp.com",
   "private": true,
   "engines": {
     "node": "14.15.1",
@@ -14,6 +13,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "create-app-react": "^1.0.6",
+    "dotenv": "^8.2.0",
     "gh-pages": "^3.2.3",
     "mdbreact": "^5.1.0",
     "react": "^17.0.2",

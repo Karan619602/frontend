@@ -21,16 +21,17 @@ USER_DETAILS_REQUEST,
     USER_DETAILS_FAIL} from '../constants/authconstants.js'
 
 import axios from 'axios'
-
+require('dotenv').config();
 export const login=(email,password)=>async(dispatch)=>{
     try {
+        console.log("Env",process.env.React_App_Base_Url)
         dispatch({type:LOGIN_REQUEST})
         const config={
                  headers:{
                      'Content-Type':'application/json'
                  }
                     }
-        const {data}= await axios.post('/api/user/login',{email,password},config)
+        const {data}= await axios.post(`${process.env.React_App_Base_Url}/api/user/login`,{email,password},config)
         console.log(data)
         dispatch({type:LOGIN_SUCCESS,
                    payload:data.user}) 
@@ -48,7 +49,7 @@ export const register=(userdata)=>async(dispatch)=>{
     try {
         dispatch({type:REGISTER_USER_REQUEST})
        
-        const {data}= await axios.post('/api/user/register',userdata)
+        const {data}= await axios.post(`${process.env.React_App_Base_Url}/api/user/register`,userdata)
         console.log(data)
         dispatch({
             type:REGISTER_USER_SUCCESS,
@@ -68,14 +69,14 @@ export const loaduser=()=>async(dispatch)=>{
     try {
         dispatch({type:LOAD_USER_REQUEST})
        
-        const {data}= await axios.get('/api/user/profile')
+        const {data}= await axios.get(`${process.env.React_App_Base_Url}/api/user/profile`)
         dispatch({type:LOAD_USER_SUCCESS,
                    payload:data.userprofile})
         
     } catch (error) {
         dispatch({
             type:LOAD_USER_FAIL,
-            payload:error.response.data.message
+            payload:error.response
         })
     }
 }
@@ -85,7 +86,7 @@ export const logoutuser=()=>async(dispatch)=>{
     try {
         
        
-        await axios.get('/api/user/logout')
+        await axios.get(`${process.env.React_App_Base_Url}/api/user/logout`)
         dispatch({type:LOGOUT_SUCCESS
                    })
         
@@ -103,7 +104,8 @@ export const allUsers = () => async (dispatch) => {
 
         dispatch({ type: ALL_USERS_REQUEST })
 
-        const { data } = await axios.get('/api/admin/alldrivers')
+        const { data } = await axios.get(`https://loadrunnerapis.herokuapp.com/api/admin/alldrivers`)
+        console.log(data);
 
         dispatch({
             type: ALL_USERS_SUCCESS,
@@ -127,7 +129,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
      
       
 
-        const { data } = await axios.put(`/api/admin/approved/driver/${id}`, {status:userData})
+        const { data } = await axios.put(`${process.env.React_App_Base_Url}/api/admin/approved/driver/${id}`, {status:userData})
         console.log("User data",data)
 
         dispatch({
@@ -153,7 +155,7 @@ export const getdriverDetails = (id) => async (dispatch) => {
       
 
 
-        const { data } = await axios.get(`/api/admin/alldrivers/${id}`)
+        const { data } = await axios.get(`${process.env.React_App_Base_Url}/api/admin/alldrivers/${id}`)
 
         dispatch({
             type: USER_DETAILS_SUCCESS,
