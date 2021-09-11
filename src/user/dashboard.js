@@ -8,17 +8,17 @@ import {updateUser} from '../actions/authactions'
 const Dashboard=()=>{
     const dispatch= useDispatch();
    const {users,loading}=useSelector(state=>state.alluser)
-const [status,setstatus]=useState('')
+// const [status,setstatus]=useState('')
   
   useEffect(()=>{
    
     dispatch(allUsers()) 
 },[dispatch])
 
-const onSubmit=(id)=>{
-   dispatch(updateUser(id,status))
+// const onSubmit=(id)=>{
+//    dispatch(updateUser(id,status))
 
-}
+// }
 const setdrivers = () => {
     const data = {
         columns: [
@@ -86,7 +86,7 @@ return (
 
             <div className="col-12 col-md-10">
                 <Fragment>
-                    <h1 className="my-5">All Users</h1>
+                    <h1 className="my-5">All Drivers</h1>
 
                     {loading ?<h2> data not available</h2> : (
                         <MDBDataTable

@@ -120,13 +120,15 @@ export const allUsers = () => async (dispatch) => {
 
 // Update User - ADMIN
 export const updateUser = (id, userData) => async (dispatch) => {
+    console.log("User Dispatch",userData)
     try {
 
         dispatch({ type: UPDATE_USER_REQUEST })
      
       
 
-        const { data } = await axios.put(`/api/admin/approved/driver/${id}`, userData)
+        const { data } = await axios.put(`/api/admin/approved/driver/${id}`, {status:userData})
+        console.log("User data",data)
 
         dispatch({
             type: UPDATE_USER_SUCCESS,
@@ -135,6 +137,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
         console.log(data);
 
     } catch (error) {
+        console.log("User Data",error)
         dispatch({
             type: UPDATE_USER_FAIL,
             payload: error

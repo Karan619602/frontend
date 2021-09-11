@@ -12,7 +12,7 @@ const UpdateUser = ({  match }) => {
     const {user,loading}=useSelector(state=>state.driverdetails)
 
 
-    const [status, setstatus] = useState("")
+    const [status, setstatus] = useState("Processing")
 
     const dispatch = useDispatch();
 
@@ -39,8 +39,8 @@ const UpdateUser = ({  match }) => {
     }, [dispatch,userId])
     
   
-    const updateOrderHandler = (id) => {
-      // e.preventDefault();
+    const updateOrderHandler = (e,id) => {
+      e.preventDefault();
 
         const formData = new FormData();
       
@@ -60,7 +60,7 @@ const UpdateUser = ({  match }) => {
                     <div className="row wrapper">
                         <div className="col-10 col-lg-5">
                             <form className="shadow-lg" >
-                                <h1 className="mt-2 mb-5">Update User</h1>
+                                <h1 className="mt-2 mb-5">Update Driver</h1>
 
 
                                
@@ -75,12 +75,12 @@ const UpdateUser = ({  match }) => {
                                         value={status}
                                         onChange={(e) => setstatus(e.target.value)}
                                     >
-                                        <option value="Proceesing">djd</option>
+                                        <option value="Proceesing">Processing</option>
                                         <option value="Approved">Approved</option>
                                     </select>
                                 </div>
 
-                                <button className="btn btn-primary btn-block" onClick={()=>updateOrderHandler(user._id)}>
+                                <button className="btn btn-primary btn-block" onClick={(e)=>updateOrderHandler(e,user._id)}>
                                 Update Status
                                     </button>
                             </form>
