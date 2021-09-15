@@ -1,7 +1,6 @@
 import React,{Fragment,useEffect,useState} from 'react'
 import { useDispatch,useSelector } from 'react-redux'
 import { register,clearerrors } from '../actions/authactions'
-import {useAlert} from 'react-alert'
 
 export const Register=({history})=>{
     const [user,setuser]=useState({
@@ -9,15 +8,15 @@ export const Register=({history})=>{
         email:'',
         password:'',
 
-        role:''
+       
 
     })
     
 
-const {username,email,password,role}=user;
+const {username,email,password}=user;
 //const alert= useAlert();
 const dispatch= useDispatch();
-    const {isAuthenicated,loading,error} =useSelector(state=>state.auth)
+    const {isAuthenicated,error} =useSelector(state=>state.auth)
     useEffect(()=>{
      if(isAuthenicated){
       history.push('/')
@@ -36,8 +35,7 @@ const dispatch= useDispatch();
       setuser({
         username:'',
         email:'',
-        password:'',
-        role:''
+        password:''
       })
 
     }

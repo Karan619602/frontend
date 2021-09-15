@@ -1,14 +1,16 @@
-import './App.css';
 import {BrowserRouter as Router,Route} from 'react-router-dom'
 import { Register } from './user/users';
-import { Home } from './home';
 import { Login } from './user/login';
+
 import Log from './user/logout';
+import './App.css';
+
 import Header from './header';
-import { loaduser, updateUser } from './actions/authactions';
+import { loaduser } from './actions/authactions';
 import { useEffect } from 'react';
 import store from './store'
-
+import Details from './user/Details';
+import Vehicle from './user/Vehicledetails';
 import ProtectedRoute from './user/route.js'
 import Profile from './user/profile';
 import Dashboard from './user/dashboard';
@@ -17,19 +19,24 @@ function App() {
 
   useEffect(()=>{
     store.dispatch(loaduser())
-  },[])
-
+  },[])   
+ 
   return (
-   <Router>
+   <Router> 
     <Header/>
-     <Home/>
 
      <Route path="/register"  component={Register} exact />
-     <Route path="/login"  component={Login} exact />
-<Route path="/logout" component={Log} exact/>
+     <Route path="/login"  component={Login} exact /> 
+      <Route path="/logout" component={Log} exact/>
+
+
 <ProtectedRoute path="/profile" component={Profile} exact/>
 <ProtectedRoute path="/dashboard" isAdmin={true} component={Dashboard} exact/>
-<ProtectedRoute path="/admin/drivers/:id" isAdmin={true}  component={UpdateUser} exact/>
+<Route path="/admin/driver/:id"  component={UpdateUser} exact/>
+<Route path="/admin/driver/details/:id"  component={Details} exact/>
+<Route path="/admin/driver/vehicledetails/:id"  component={Vehicle} exact/>
+
+
 
    </Router>
   );

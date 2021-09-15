@@ -1,18 +1,19 @@
 import React, { Fragment, useState, useEffect } from 'react'
-import {Link} from 'react-router-dom'
 
 
 import { useDispatch, useSelector } from 'react-redux'
 import { updateUser ,getdriverDetails} from '../actions/authactions'
 
 
-const UpdateUser = ({  match }) => {
+const UpdateUser = ({ history, match }) => {
 
    // const {users,loading}=useSelector(state=>state.alluser)
-    const {user,loading}=useSelector(state=>state.driverdetails)
+    const {user}=useSelector(state=>state.driverdetails)
+    const {isUpdated}=useSelector(state=>state.user)
 
 
-    const [status, setstatus] = useState("")
+
+    const [status, setstatus] = useState("Processing")
 
     const dispatch = useDispatch();
 
@@ -22,25 +23,27 @@ const UpdateUser = ({  match }) => {
 
     useEffect(() => {
 
-        // console.log(user && user._id !== userId);
-        // if (user && user._id !== userId) {
+        console.log(user && user._id !== userId);
+        if (user && user._id !== userId) {
             dispatch(getdriverDetails(userId))
-        // } else {
+        } else {
           
-        //     setstatus(user.status)
-        // }
-
-      
+            setstatus(user.status)
+        }
+           
+      if(isUpdated){
+             history.push('/dashboard')
+      }
 
            
          
         
 
-    }, [dispatch,userId])
+    }, [dispatch,userId,isUpdated,history,user])
     
   
-    const updateOrderHandler = (id) => {
-      // e.preventDefault();
+    const updateOrderHandler = (e,id) => {
+      e.preventDefault();
 
         const formData = new FormData();
       
@@ -60,7 +63,7 @@ const UpdateUser = ({  match }) => {
                     <div className="row wrapper">
                         <div className="col-10 col-lg-5">
                             <form className="shadow-lg" >
-                                <h1 className="mt-2 mb-5">Update User</h1>
+                                <h1 className="mt-2 mb-5">Update Driver</h1>
 
 
                                
@@ -75,12 +78,13 @@ const UpdateUser = ({  match }) => {
                                         value={status}
                                         onChange={(e) => setstatus(e.target.value)}
                                     >
-                                        <option value="Proceesing">djd</option>
+                                        <option value="Processing">Processing</option>
                                         <option value="Approved">Approved</option>
+                                        <option value="Reject">Reject</option>
                                     </select>
                                 </div>
 
-                                <button className="btn btn-primary btn-block" onClick={()=>updateOrderHandler(user._id)}>
+                                <button className="btn btn-primary btn-block" onClick={(e)=>updateOrderHandler(e,user._id)}>
                                 Update Status
                                     </button>
                             </form>

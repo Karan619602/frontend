@@ -1,18 +1,18 @@
 import React, { Fragment } from 'react'
-import { Route, Link } from 'react-router-dom'
+import {  Link } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import { logoutuser } from './actions/authactions'
+import { logoutdriver } from './actions/authactions'
 import './App.css'
 
 const Header = () => {
     const dispatch = useDispatch();
 
-    const { user, loading } = useSelector(state => state.auth)
+    const { user } = useSelector(state => state.auth)
 
     const logoutHandler = () => {
-        dispatch(logoutuser());
+        dispatch(logoutdriver());
     }
 
     return (
@@ -27,19 +27,21 @@ const Header = () => {
        {user&& user.role==="admin" &&(
          <Link to="/dashboard" >Dashboard</Link>
        )}
-
+<hr />
      <Link className="text-danger" to="/" onClick={logoutHandler}>
       Logout
      </Link>
+     <hr />
      <Link to="/profile">profile</Link>
 
      </div>  ) :   (
                         <Fragment>
        <h1 className="heading">Welcome to  app</h1>
-                          <Link to="/login"  id="login_btn">Login</Link>
-                          <Link to="/register"  id="signup_btn">signup</Link>
-   <Link to="/profile">profile</Link>
-
+                          <Link to="/login"  >Login</Link>
+                          <hr />
+                          <Link to="/register"  >signup</Link>
+                          <hr />
+     <Link to="/profile">profile</Link>
                         </Fragment>
                        )} 
 

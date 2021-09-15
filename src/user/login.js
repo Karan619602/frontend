@@ -12,7 +12,7 @@ export const Login=({history})=>{
     const [password,setPassword]=useState('')
    // const alert= useAlert();
     const dispatch= useDispatch();
-    const {isAuthenicated,loading,error} =useSelector(state=>state.auth)
+    const {isAuthenicated,error} =useSelector(state=>state.auth)
 
     useEffect(()=>{
         if(isAuthenicated){

@@ -120,7 +120,9 @@ export const userReducer = (state = {}, action) => {
         case UPDATE_USER_REQUEST:
             return {
                 ...state,
-                loading: true
+                loading: true,
+                isUpdated:false
+
             }
 
       
@@ -128,14 +130,15 @@ export const userReducer = (state = {}, action) => {
             return {
                 ...state,
                 loading: false,
-                isUpdated: action.payload
+                isUpdated:true
             }
 
       case UPDATE_USER_FAIL:
                   return {
                 ...state,
                 loading: false,
-                error: action.payload
+                error: action.payload,
+                isUpdated:false
             }
 
         case CLEAR_ERRORS:
@@ -149,20 +152,21 @@ export const userReducer = (state = {}, action) => {
     }
 }
 
-export const driverDetailsReducer = (state = { user: {} }, action) => {
+export const driverDetailsReducer = (state = { user: {},user1:{} }, action) => {
     switch (action.type) {
 
         case USER_DETAILS_REQUEST:
             return {
                 ...state,
-                loading: true,
-            }
+                loading: true
+           }
 
         case USER_DETAILS_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                user: action.payload
+                user: action.payload,
+                user1:action.payload1
             }
 
         case USER_DETAILS_FAIL:
@@ -180,5 +184,67 @@ export const driverDetailsReducer = (state = { user: {} }, action) => {
 
         default:
             return state;
+    }
+}
+
+
+export const authdriver=(state={driver:{}},action)=>{
+    switch(action.type){
+
+        case LOGIN_REQUEST:
+        case REGISTER_USER_REQUEST:
+        case LOAD_USER_REQUEST:
+            return{
+                loading:true,
+                isAuthenicated:false,
+                isApproved:false
+            }
+
+            case LOGIN_SUCCESS:
+            case REGISTER_USER_SUCCESS:
+            case LOAD_USER_SUCCESS:
+                return{
+                    ...state,
+                    loading:false,
+                    isAuthenicated:true,
+                     driver:action.payload,
+                     isApproved:true
+                }
+
+                case LOGOUT_SUCCESS:
+                    return {
+                        loading:false,
+                        isAuthenicated:false,
+                        driver:null
+                    }
+                case LOAD_USER_FAIL:
+                    return{
+                        loading:false,
+                        isAuthenicated:false,
+                        driver:null,
+                        error:action.payload,
+                        isApproved:false
+                    }
+                    case LOGOUT_FAIL:
+                        return{
+                            ...state,error:action.payload
+                        }
+                case LOGIN_FAIL:
+                case REGISTER_USER_FAIL:
+                    return{
+                        ...state,
+                        loading:false,
+                        isAuthenicated:false,
+                        driver:null,
+                        error:action.payload
+                    }
+                    case CLEAR_ERRORS:
+                        return{
+                            ...state,
+                            error:action.payload
+                        }
+    default:
+        return state;
+
     }
 }
