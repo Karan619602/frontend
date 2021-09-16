@@ -152,7 +152,7 @@ export const userReducer = (state = {}, action) => {
     }
 }
 
-export const driverDetailsReducer = (state = { user: {},user1:{} }, action) => {
+export const driverDetailsReducer = (state = { driver: {},driver1:{} }, action) => {
     switch (action.type) {
 
         case USER_DETAILS_REQUEST:
@@ -165,8 +165,8 @@ export const driverDetailsReducer = (state = { user: {},user1:{} }, action) => {
             return {
                 ...state,
                 loading: false,
-                user: action.payload,
-                user1:action.payload1
+                driver: action.payload,
+                driver1:action.payload1
             }
 
         case USER_DETAILS_FAIL:

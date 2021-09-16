@@ -8,16 +8,16 @@ import {  getdriverDetails} from '../actions/authactions'
 
 const Details=({match})=>{
     const dispatch= useDispatch();
-    const {user}=useSelector(state=>state.driverdetails)
+    const {driver}=useSelector(state=>state.driverdetails)
 
-    const userId = match.params.id;
+    const driverId = match.params.id;
 
   useEffect(()=>{ 
  
-    dispatch(getdriverDetails(userId)) 
+    dispatch(getdriverDetails(driverId)) 
 
   
-},[dispatch,userId])
+},[dispatch,driverId])
 
 
 
@@ -28,16 +28,25 @@ return (
                 <Fragment>
                     <div className="my-5">
                         <h2>Profile Photo</h2>
-                        <img src={user.Profile_Photo?user.Profile_Photo.url:''} alt="" /> 
+                        <img src={driver.Profile_Photo?driver.Profile_Photo.url:''} alt="" /> 
+                        <hr />
                         <h3>Aadhar Card</h3>
-                        <h4> Aadhar No{user.Aadhar_No}</h4>
-                        <img src={user.Aadhar_Photo?user.Aadhar_Photo.url:''} alt={user.Aadhar_No} />
+                        <h4> Aadhar No {driver.Aadhar_No}</h4>
+                        <h4>Aadhar Front</h4>
+                        <img src={driver.Aadhar_Photo_Front?driver.Aadhar_Photo_Front.url:''} alt={driver.Aadhar_No} />
+                        <h4>Aadhar Back</h4>
+                        <img src={driver.Aadhar_Photo_Back?driver.Aadhar_Photo_Back.url:''} alt={driver.Aadhar_No} />
+                        <hr />
+
+
                         <h3>Drivng License </h3>
-                        <h4> Drriving License No{user.Driving_License_No}</h4>
-                        <img src={user.Driving_License_Photo?user.Driving_License_Photo.url:''} alt={user.Driving_License_NO} />
+                        <h4> Drriving License No{driver.Driving_License_No}</h4>
+                        <img src={driver.Driving_License_Photo?driver.Driving_License_Photo.url:''} alt={driver.Driving_License_NO} />
+                        <hr />
+
                         <h3> PAN Card</h3>
-                        <h4> Pan No{user.PAN_No}</h4>
-                        <img src={user.PAN_Photo?user.PAN_Photo.url:''} alt={user.PAN_NO} />
+                        <h4> Pan No{driver.PAN_No}</h4>
+                        <img src={driver.PAN_Photo?driver.PAN_Photo.url:''} alt={driver.PAN_NO} />
                     </div>
 
 

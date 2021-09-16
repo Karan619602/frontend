@@ -42,7 +42,6 @@ const setdrivers = () => {
                 field: 'Phone_No',
                 sort: 'asc'
             },
-          
             {
                 label: 'vehicle type',
                 field: 'vehicletype',
